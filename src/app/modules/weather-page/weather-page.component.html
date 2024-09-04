@@ -1,0 +1,32 @@
+@let controls = form.controls;
+<section class="weather-page__controls">
+  @if (countriesNames) {
+  <mat-form-field>
+    <mat-label>Country</mat-label>
+
+    <mat-select [formControl]="controls.country">
+      @for (country of countriesNames; track country) {
+      <mat-option [value]="country">{{ country }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  }
+
+  <mat-form-field>
+    <mat-label>Forecast days</mat-label>
+    <mat-select [formControl]="controls['forecastDays']">
+      @for (dayKey of forecastDaysKeys; track dayKey) {
+      <mat-option [value]="forecastDays[dayKey]">{{ dayKey }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-flat-button (click)="getWeather()">Search</button>
+</section>
+
+<div class="weather-page-output">
+  @let data = weatherData | async; @if (data) {
+  <app-weather-page-graph [temperaturesData]="data"></app-weather-page-graph>
+  <app-weather-page-table [table]="data"></app-weather-page-table>
+  }
+</div>

@@ -1,0 +1,24 @@
+<table mat-table [dataSource]="table()" class="mat-elevation-z8">
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="day">
+    <th mat-header-cell *matHeaderCellDef>Day</th>
+    <td mat-cell *matCellDef="let element">{{ element.dayName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="min temp.">
+    <th mat-header-cell *matHeaderCellDef>Max temp.</th>
+    <td mat-cell *matCellDef="let element">{{ element.maxTemperature }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="max temp.">
+    <th mat-header-cell *matHeaderCellDef>Min temp.</th>
+    <td mat-cell *matCellDef="let element">{{ element.minTemperature }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
+  <tr mat-row *matRowDef="let row; columns: tableHeaders"></tr>
+</table>

@@ -17,10 +17,11 @@ import {
   parseWeatherData,
   parseWeatherDataToTable,
 } from './weather-page.helpers';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { WeatherPageTable } from './weather-page-table/weather-page-table.component';
 import { CommonModule } from '@angular/common';
 import { WeatherPageGraphComponent } from './weather-page-graph/weather-page-graph.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-weather-page',
@@ -35,6 +36,7 @@ import { WeatherPageGraphComponent } from './weather-page-graph/weather-page-gra
     WeatherPageTable,
     CommonModule,
     WeatherPageGraphComponent,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './weather-page.component.html',
   styleUrl: './weather-page.component.scss',
@@ -44,6 +46,7 @@ import { WeatherPageGraphComponent } from './weather-page-graph/weather-page-gra
 export class WeatherPageComponent {
   public readonly forecastDaysKeys = Object.keys(WEATHER_PAGE_FORECAST_DAYS);
   public readonly forecastDays = WEATHER_PAGE_FORECAST_DAYS;
+  public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public form = this.weatherPageBuilder.createFormGroup();
   public countries: Country[];
   public countriesNames: Country['name'][];
@@ -59,6 +62,7 @@ export class WeatherPageComponent {
   }
 
   public getWeather(): void {
+    this.isLoading$.next(true);
     const country: Country = this.countries.find(
       (country) => country.name === this.form.value.country
     );
@@ -70,6 +74,7 @@ export class WeatherPageComponent {
       })
       .subscribe((res) => {
         this.weatherData.next(parseWeatherDataToTable(parseWeatherData(res)));
+        this.isLoading$.next(false);
       });
   }
 

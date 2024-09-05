@@ -21,7 +21,13 @@
     </mat-select>
   </mat-form-field>
 
-  <button mat-flat-button (click)="getWeather()">Search</button>
+  <button
+    mat-flat-button
+    [disabled]="isLoading$ | async"
+    (click)="getWeather()"
+  >
+    Search
+  </button>
 </section>
 
 <div class="weather-page-output">
@@ -30,3 +36,9 @@
   <app-weather-page-table [table]="data"></app-weather-page-table>
   }
 </div>
+
+@if (isLoading$ | async) {
+<div class="weather-page__loading">
+  <mat-spinner></mat-spinner>
+</div>
+}

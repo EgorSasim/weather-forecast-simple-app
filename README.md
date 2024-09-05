@@ -1,5 +1,13 @@
 # WeatherForecastSimpleApp
 
+![image](https://github.com/user-attachments/assets/d63bac4f-74c6-4c1f-be87-1772e35ae4e8)
+
+![image](https://github.com/user-attachments/assets/17c24ebf-d3da-443c-9100-0d1a671a7a0e)
+
+![image](https://github.com/user-attachments/assets/e6cd5d3f-5036-4c57-aeba-73967ecaec41)
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.10.
 
 ## Development server
